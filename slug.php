@@ -4,6 +4,7 @@
  * Kohana slug helper class.
  *
  * @category   Helpers
+ * @version    1.1
  * @author     Andriy Prokopenko <https://github.com/sleepyboy>
  */
 class Slug {
@@ -11,7 +12,7 @@ class Slug {
 	/**
 	 * Slugify the given string.
 	 *
-	 * Usage - Slug::ify('Mórë thån wørds', '-') -> "more-than-words";
+	 * Usage - Slug::ify('Mórë thån wørds') -> "more-than-words";
 	 *
 	 * @param 	$string 				String to be slugified.
 	 * @param 	$replacement 		Replacement for the spaces.
@@ -19,7 +20,7 @@ class Slug {
 	 * @return string
 	 *   Filtered value
 	 */
-	public static function ify($string, $replacement = '_')
+	public static function ify($string, $replacement = '-')
 	{
 		$slug = UTF8::trim(UTF8::strtolower($string));
 
@@ -98,7 +99,6 @@ class Slug {
 			'/ÿ|ý|ỳ|ŷ|¥/' => 'y',
 			'/Ž|Ż|Ź/' => 'Z',
 			'/ž|ż|ź/' => 'z',
-			'/[^\w\s]/' => ' ',
 			'/\\s+/' => $replacement
 		);
 		$slug = preg_replace(
@@ -107,8 +107,6 @@ class Slug {
 			$slug
 		);
 
-		$slug = preg_replace('/[^a-zA-Z0-9_-]+/s', '', $slug);
-		$slug = trim($slug, $replacement);
-		return $slug;
+		return URL::title($slug, $replacement);
 	}
 }
