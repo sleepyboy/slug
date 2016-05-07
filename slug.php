@@ -14,7 +14,7 @@ class Slug {
 	 *
 	 * Usage - Slug::ify('Mórë thån wørds') -> "more-than-words";
 	 *
-	 * @param 	$string 				String to be slugified.
+	 * @param 	$string 		String to be slugified.
 	 * @param 	$replacement 		Replacement for the spaces.
 	 *
 	 * @return string
